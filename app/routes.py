@@ -50,9 +50,14 @@ def register():
 def send():
     form = SendForm()
     if form.validate_on_submit():
-        newemail = Email(subject=form.subject.data, body=form.body.data, to=form.to.data, fromid=current_user.id)
+        newemail = Email(subject=form.subject.data, body=form.body.data, to=form.to.data, fromid=current_user.id, fromemail=current_user.email)
         db.session.add(newemail)
         db.session.commit()
         return redirect('/index')
     return render_template('send.html', form=form)
+
+@app.route('/email/<eid>')
+def viewemail(eid):
+    email = Email.query.get(eid)
+    return render_template('email.html', title='View Email', email=email)
 

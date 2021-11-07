@@ -5,6 +5,7 @@
     <div>
         <h2>{{ email.subject }}</h2>
         <p>By: {{ email.fromemail }}</p>
+        <a href="/email/{{ email.id }}">View Email</a>
     </div>
 {% endfor %}
 {% endblock %}
