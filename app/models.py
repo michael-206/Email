@@ -27,7 +27,8 @@ class Email(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     subject = db.Column(db.String(50), nullable=False)
     body = db.Column(db.Text(), nullable=False)
-    toid = db.Column(db.String(50), nullable=False)
+    to = db.Column(db.Integer(), nullable=False)
+    fromid = db.Column(db.Integer(), nullable=False)
     fromemail = db.Column(db.String(50), nullable=False)
     
 

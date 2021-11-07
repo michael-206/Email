@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Hi, {{ curent_user.username }}</h1>
+<h1>Hi, {{ email }}</h1>
 {% for email in emails %}
     <div>
         <h2>{{ email.subject }}</h2>
-        <p>By: e</p>
+        <p>By: {{ email.fromemail }}</p>
     </div>
+{% endfor %}
 {% endblock %}

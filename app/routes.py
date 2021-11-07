@@ -8,8 +8,9 @@ from app.models import User, Email
 @app.route('/')
 @login_required
 def index():
-    emails = Email.query.filter_by(toid=current_user.id)
-    return render_template('index.html', title='Home', emails=emails)
+    email = current_user.email
+    emails = Email.query.filter_by(to=current_user.email)
+    return render_template('index.html', title='Home', emails=emails, email=email)
 
 @app.route('/login', methods=['POST','GET'])
 def login():
@@ -17,7 +18,7 @@ def login():
         return redirect('index')
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect('/login')
@@ -37,10 +38,21 @@ def register():
         return redirect('/index')
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
-        return redirect('/login')
+        login_user(user)
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/send', methods=['GET','POST'])
+def send():
+    form = SendForm()
+    if form.validate_on_submit():
+        newemail = Email(subject=form.subject.data, body=form.body.data, to=form.to.data, fromid=current_user.id)
+        db.session.add(newemail)
+        db.session.commit()
+        return redirect('/index')
+    return render_template('send.html', form=form)
+
