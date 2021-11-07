@@ -25,9 +25,10 @@ class User(db.Model, UserMixin):
 class Email(db.Model):
     __tablename__ = 'Email'
     id = db.Column(db.Integer(), primary_key=True)
+    subject = db.Column(db.String(50), nullable=False)
     body = db.Column(db.Text(), nullable=False)
     toid = db.Column(db.String(50), nullable=False)
-    fromid = db.Column(db.String(50), nullable=False)
+    fromemail = db.Column(db.String(50), nullable=False)
     
 
     def __repr__(self):
