@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Hi, {{ email }}</h1>
+<a href="/send">Compose New Email</a>
 {% for email in emails %}
+<hr>
     <div>
         <h2>{{ email.subject }}</h2>
         <p>By: {{ email.fromemail }}</p>

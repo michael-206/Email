@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <form action="" method="post" novalidate>
+    {{ ckeditor.load(pkg_type="full-all") }}
     {{ form.hidden_tag() }}
     {% for field in form %}
         {% if field.name != 'csrf_token' %}
             {% if field.name == 'submit' %}
+            
                 <p>
                     {{ field }}
                 </p>
@@ -16,5 +18,7 @@
             {% endif %}
         {% endif %}
     {% endfor %}
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='body') }}
 </form>
 {% endblock %}

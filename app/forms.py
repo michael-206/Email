@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo
+from flask_ckeditor import CKEditorField
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
@@ -16,5 +17,5 @@ class RegisterForm(FlaskForm):
 class SendForm(FlaskForm):
     to = StringField('To', validators=[DataRequired()])
     subject = StringField('Subject', validators=[DataRequired()])
-    body = TextAreaField('Email Body', validators=[DataRequired()])
+    body = CKEditorField('Email Body', validators=[DataRequired()])
     submit = SubmitField('Send')

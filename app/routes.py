@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from flask_login import current_user, login_required, login_user, logout_user
 from app.forms import LoginForm, RegisterForm, SendForm
 from app.models import User, Email
@@ -50,6 +50,7 @@ def register():
 def send():
     form = SendForm()
     if form.validate_on_submit():
+        print(form.body.data)
         newemail = Email(subject=form.subject.data, body=form.body.data, to=form.to.data, fromid=current_user.id, fromemail=current_user.email)
         db.session.add(newemail)
         db.session.commit()
@@ -60,4 +61,6 @@ def send():
 def viewemail(eid):
     email = Email.query.get(eid)
     return render_template('email.html', title='View Email', email=email)
+
+
 
