@@ -18,7 +18,7 @@
             {% endif %}
         {% endif %}
     {% endfor %}
-    {{ ckeditor.load() }}
+    {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor.js')) }}
     {{ ckeditor.config(name='body') }}
 </form>
 {% endblock %}
