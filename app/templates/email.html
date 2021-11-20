@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+<style>
+.cke_top {
+    display: none;
+}
+</style>
+<script>
+    config.readOnly = true;
+</script>
 <h1>{{ email.subject }}</h1>
 <h3>From: {{ email.fromemail }}</h3>
 <div class="email_body">
-    {{ email.body }}
+    {{ email.body|safe }}
 </div>
 {% endblock %}

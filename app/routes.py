@@ -1,8 +1,10 @@
+from flask_wtf import form
 from app import app, db
-from flask import render_template, redirect, flash, request
+from flask import render_template, redirect, flash
 from flask_login import current_user, login_required, login_user, logout_user
 from app.forms import LoginForm, RegisterForm, SendForm
 from app.models import User, Email
+import os
 
 @app.route('/index')
 @app.route('/')
@@ -61,6 +63,3 @@ def send():
 def viewemail(eid):
     email = Email.query.get(eid)
     return render_template('email.html', title='View Email', email=email)
-
-
-

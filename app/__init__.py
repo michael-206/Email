@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 
-app = Flask(__name__, static_folder="/static/")
+app = Flask(__name__, static_folder="static")
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
