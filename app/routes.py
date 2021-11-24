@@ -4,14 +4,20 @@ from flask import render_template, redirect, flash
 from flask_login import current_user, login_required, login_user, logout_user
 from app.forms import LoginForm, RegisterForm, SendForm, DocumentEditForm, AnswerQuestionForm, AskQuestionForm
 from app.models import User, Email, Questions, Documents
-import os
+
+
+@app.route('/index')
+@login_required
+def index():
+    documents = Documents.query.filter_by(username=)
+    return render_template('index.html', title='Home', documents=documents)
 
 @app.route('/email')
 @login_required
-def index():
+def email():
     email = current_user.email
     emails = Email.query.filter_by(to=current_user.email)
-    return render_template('emailindex.html', title='Home', emails=emails, email=email)
+    return render_template('emailindex.html', title='Email', emails=emails, email=email)
 
 @app.route('/login', methods=['POST','GET'])
 def login():
