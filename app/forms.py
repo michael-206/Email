@@ -19,3 +19,16 @@ class SendForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
     body = CKEditorField('Email Body', validators=[DataRequired()])
     submit = SubmitField('Send')
+
+class DocumentEditForm(FlaskForm):
+    title = StringField('Subject', validators=[DataRequired()])
+    body = CKEditorField('Document Text', validators=[DataRequired()])
+    submit = SubmitField('Send')
+
+class AskQuestionForm(FlaskForm):
+    question = StringField('Question', validators=[DataRequired()])
+    submit = SubmitField('Ask')
+
+class AnswerQuestionForm(FlaskForm):
+    answer = CKEditorField('Your Answer', validators=[DataRequired()])
+    submit = SubmitField('Ask')

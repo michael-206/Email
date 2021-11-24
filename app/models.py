@@ -34,3 +34,23 @@ class Email(db.Model):
 
     def __repr__(self):
 	    return "<{}:{}>".format(self.id, self.body)
+
+class Questions(db.Model):
+    __tablename__ = 'Questions'
+    id = db.Column(db.Integer(), primary_key=True)
+    question = db.Column(db.Text(), nullable=False)
+    answer = db.Column(db.Text(), nullable=False)
+    
+
+    def __repr__(self):
+	    return "<{}:{}>".format(self.id, self.question)
+
+class Documents(db.Model):
+    __tablename__ = 'Documents'
+    id = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    body = db.Column(db.Text(), nullable=False)
+    
+
+    def __repr__(self):
+	    return "<{}:{}>".format(self.id, self.title)
