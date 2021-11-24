@@ -2,17 +2,16 @@ from flask_wtf import form
 from app import app, db
 from flask import render_template, redirect, flash
 from flask_login import current_user, login_required, login_user, logout_user
-from app.forms import LoginForm, RegisterForm, SendForm
-from app.models import User, Email
+from app.forms import LoginForm, RegisterForm, SendForm, DocumentEditForm, AnswerQuestionForm, AskQuestionForm
+from app.models import User, Email, Questions, Documents
 import os
 
-@app.route('/index')
-@app.route('/')
+@app.route('/email')
 @login_required
 def index():
     email = current_user.email
     emails = Email.query.filter_by(to=current_user.email)
-    return render_template('index.html', title='Home', emails=emails, email=email)
+    return render_template('emailindex.html', title='Home', emails=emails, email=email)
 
 @app.route('/login', methods=['POST','GET'])
 def login():
